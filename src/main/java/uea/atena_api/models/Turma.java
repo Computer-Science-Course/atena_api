@@ -3,6 +3,7 @@ package uea.atena_api.models;
 import java.io.Serializable;
 import java.util.Objects;
 
+import jakarta.persistence.Embeddable;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,7 +22,7 @@ public class Turma implements Serializable{
 	@NotBlank(message="Nome turma obrigatório")
 	private String nome;
 	
-	@Embedded
+
 	private Professor professor;
 	
 	public Turma() {

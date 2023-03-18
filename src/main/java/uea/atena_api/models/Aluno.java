@@ -24,7 +24,7 @@ public class Aluno implements Serializable{
 	@NotBlank(message="Numero matrícula obrigatório")
 	private Long matricula;
 	
-	@Embedded
+
 	private Turma turma;
 	
 	public Aluno() {
