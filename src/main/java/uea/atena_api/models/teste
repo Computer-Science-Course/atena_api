@@ -1,5 +1,10 @@
 // Aqui vão as funções
 
+
+private User criar(Long id){
+	// Aqui tem uma lógica
+}
+
 private User buscar(Long id){
     // Aqui tem uma lógica
 }
@@ -7,3 +12,4 @@ private User buscar(Long id){
 private User excluir(Long id){
     // Aqui tem uma lógica
 }
+
