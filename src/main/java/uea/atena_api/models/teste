@@ -1,1 +1,5 @@
 // Aqui vão as funções
+
+private User criar(Long id){
+	// Aqui tem uma lógica
+}
