@@ -1,1 +1,5 @@
 // Aqui vão as funções
+
+private User buscar(Long id){
+    // Aqui tem uma lógica
+}
