@@ -27,4 +27,8 @@ public class ProfessorService {
 		return professor;
 	}
 	
+	public void deletar(Long codigo) {
+		professorRepository.deleteById(codigo);
+	}
+	
 }
