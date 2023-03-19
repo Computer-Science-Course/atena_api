@@ -21,4 +21,8 @@ public class AlunoService {
 	public List<Aluno> listar() {
 		return alunoRepository.findAll();
 	}
+	
+	public void deletar(Long codigo) {
+		alunoRepository.deleteById(codigo);
+	}
 }
