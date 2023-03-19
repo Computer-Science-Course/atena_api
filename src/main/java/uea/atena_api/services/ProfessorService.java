@@ -21,4 +21,10 @@ public class ProfessorService {
 	public List<Professor> listar(){
 		return professorRepository.findAll();
 	}
+	
+	public Professor buscarPorId(Long codigo) {
+		Professor professor = professorRepository.findById(codigo).orElseThrow();
+		return professor;
+	}
+	
 }
