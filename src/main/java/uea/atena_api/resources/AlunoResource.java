@@ -38,6 +38,12 @@ public class AlunoResource {
 		return ResponseEntity.ok().body(aluno);
 	}
 	
+	@GetMapping(value = "/{codigo}")
+	public ResponseEntity<Aluno> buscarPorId(@PathVariable Long codigo){
+		Aluno aluno = alunoService.buscarPorId(codigo);
+		return ResponseEntity.ok().body(aluno);
+	}
+	
 	@DeleteMapping(value = "/{codigo}")
 	public ResponseEntity<Void> deletar(@PathVariable Long codigo){
 		alunoService.deletar(codigo);
