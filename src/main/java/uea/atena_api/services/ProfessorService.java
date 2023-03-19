@@ -37,5 +37,14 @@ public class ProfessorService {
 		BeanUtils.copyProperties(professor, professorSalva, "codigo");
 		return professorRepository.save(professorSalva);
 	}
-	
 }
+
+
+
+
+
+
+
+
+
+
