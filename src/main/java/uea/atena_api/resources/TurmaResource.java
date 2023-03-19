@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import jakarta.validation.Valid;
-import uea.atena_api.models.Professor;
 import uea.atena_api.models.Turma;
 import uea.atena_api.services.TurmaService;
 
