@@ -20,7 +20,7 @@ import uea.atena_api.models.Professor;
 import uea.atena_api.services.ProfessorService;
 
 @RestController
-@RequestMapping("/professor")
+@RequestMapping("/professores")
 public class ProfessorResouce {
 	
 	@Autowired
