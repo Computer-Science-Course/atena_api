@@ -18,7 +18,7 @@ import uea.atena_api.models.Aluno;
 import uea.atena_api.services.AlunoService;
 
 @RestController
-@RequestMapping("/aluno")
+@RequestMapping("/alunos")
 public class AlunoResource {
 
 	@Autowired
