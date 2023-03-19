@@ -30,11 +30,14 @@ public class Turma implements Serializable {
 	public Turma() {
 	}
 
-	public Turma(Long codigo, String nome) {
+	public Turma(Long codigo, @NotBlank(message = "Nome é obrigátorio") String nome, Professor professor) {
 		super();
 		this.codigo = codigo;
 		this.nome = nome;
+		this.professor = professor;
 	}
+
+
 
 	public Long getCodigo() {
 		return codigo;
@@ -50,6 +53,14 @@ public class Turma implements Serializable {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public Professor getProfessor() {
+		return professor;
+	}
+
+	public void setProfessor(Professor professor) {
+		this.professor = professor;
 	}
 
 	@Override
