@@ -1,7 +1,5 @@
 package uea.atena_api.models;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
@@ -10,35 +8,31 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.validation.constraints.NotBlank;
 
 @Entity
-public class ProvaAluno implements Serializable{
-
-	private static final long serialVersionUID = 1L;
+public class TurmaAluno{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
 	
-	@NotBlank(message = "Nota obrigátoria")
-	private BigDecimal pontuacao;
+	@ManyToOne
+	@JoinColumn(name = "codigo_turma")
+	private Turma turma;
 	
 	@ManyToOne
-	@JoinColumn(name="codigo_prova")
-	private Prova prova;
-	 
-	@ManyToOne
-	@JoinColumn(name="codigo_aluno")
+	@JoinColumn(name = "codigo_aluno")
 	private Aluno aluno;
-	
-	public ProvaAluno() {
+
+	public TurmaAluno() {
+
 	}
-	
-	public ProvaAluno(Long codigo, BigDecimal pontuacao) {
+
+	public TurmaAluno(Long codigo, Turma turma, Aluno aluno) {
 		super();
 		this.codigo = codigo;
-		this.pontuacao = pontuacao;
+		this.turma = turma;
+		this.aluno = aluno;
 	}
 
 	public Long getCodigo() {
@@ -49,12 +43,20 @@ public class ProvaAluno implements Serializable{
 		this.codigo = codigo;
 	}
 
-	public BigDecimal getPontuacao() {
-		return pontuacao;
+	public Turma getTurma() {
+		return turma;
 	}
 
-	public void setPontuacao(BigDecimal pontuacao) {
-		this.pontuacao = pontuacao;
+	public void setTurma(Turma turma) {
+		this.turma = turma;
+	}
+
+	public Aluno getAluno() {
+		return aluno;
+	}
+
+	public void setAluno(Aluno aluno) {
+		this.aluno = aluno;
 	}
 
 	@Override
@@ -70,7 +72,9 @@ public class ProvaAluno implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ProvaAluno other = (ProvaAluno) obj;
+		TurmaAluno other = (TurmaAluno) obj;
 		return Objects.equals(codigo, other.codigo);
 	}
+	
+	
 }
