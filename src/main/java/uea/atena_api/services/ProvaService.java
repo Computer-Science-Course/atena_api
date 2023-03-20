@@ -28,4 +28,9 @@ public class ProvaService {
 	public List<Prova> listar() {
 		return provaRepository.findAll();
 	}
+	
+	public Prova buscarPorCodigo(Long codigo) {
+		Prova prova = provaRepository.findById(codigo).orElseThrow();
+		return prova;
+	}
 }
