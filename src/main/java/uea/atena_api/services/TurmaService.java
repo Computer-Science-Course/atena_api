@@ -33,4 +33,8 @@ public class TurmaService {
 		Turma turma = turmaRepository.findById(codigo).orElseThrow();
 		return turma;
 	}
+	
+	public void excluir(Long codigo) {
+		turmaRepository.deleteById(codigo);
+	}
 }

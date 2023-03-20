@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,6 +42,12 @@ public class TurmaResource {
 	public ResponseEntity<Turma> buscarPorId(@PathVariable Long codigo) {
 		Turma turma = turmaService.buscarPorId(codigo);
 		return ResponseEntity.ok().body(turma);
+	}
+	
+	@DeleteMapping(value = "/{codigo}")
+	public ResponseEntity<Void> excluir(@PathVariable Long codigo) {
+		turmaService.excluir(codigo);
+		return ResponseEntity.noContent().build();
 	}
 
 }
