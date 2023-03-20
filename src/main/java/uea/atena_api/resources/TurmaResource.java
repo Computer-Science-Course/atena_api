@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +34,12 @@ public class TurmaResource {
 	@GetMapping
 	public ResponseEntity<List<Turma>> listar(){
 		List<Turma> turma = turmaService.listar();
+		return ResponseEntity.ok().body(turma);
+	}
+	
+	@GetMapping(value = "/{codigo}")
+	public ResponseEntity<Turma> buscarPorId(@PathVariable Long codigo) {
+		Turma turma = turmaService.buscarPorId(codigo);
 		return ResponseEntity.ok().body(turma);
 	}
 

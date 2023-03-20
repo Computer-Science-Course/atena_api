@@ -28,4 +28,9 @@ public class TurmaService {
 	public List<Turma> listar(){
 		return turmaRepository.findAll();
 	}
+	
+	public Turma buscarPorId(Long codigo) {
+		Turma turma = turmaRepository.findById(codigo).orElseThrow();
+		return turma;
+	}
 }
