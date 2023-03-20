@@ -2,6 +2,7 @@ package uea.atena_api.services;
 
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,5 +37,14 @@ public class TurmaService {
 	
 	public void excluir(Long codigo) {
 		turmaRepository.deleteById(codigo);
+	}
+	
+	public Turma atualizar(Long codigo, Turma turma) {
+		Turma turmaSalvo = turmaRepository.findById(codigo).orElseThrow();
+		
+		Professor professor = professorRepository.findById(
+				turma.getProfessor().getCodigo()).orElseThrow();
+		BeanUtils.copyProperties(turma, turmaSalvo, "codigo");
+		return turmaRepository.save(turmaSalvo);
 	}
 }
