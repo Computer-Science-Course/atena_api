@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -16,7 +17,8 @@ public class Aluno implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(generator = "aluno_seq_generator", strategy = GenerationType.SEQUENCE)
+	@SequenceGenerator(name = "aluno_seq_generator", initialValue = 51, sequenceName = "SEQ_ALUNO", allocationSize = 1)
 	private Long codigo;
 
 	@NotBlank(message = "Nome é obrigátorio")

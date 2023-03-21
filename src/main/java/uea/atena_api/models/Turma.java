@@ -9,6 +9,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
@@ -17,7 +19,8 @@ public class Turma implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(generator = "turma_seq_generator", strategy = GenerationType.SEQUENCE)
+	@SequenceGenerator(name = "turma_seq_generator", initialValue = 51, sequenceName = "SEQ_TURMA", allocationSize = 1)
 	private Long codigo;
 
 	@NotBlank(message = "Nome é obrigátorio")

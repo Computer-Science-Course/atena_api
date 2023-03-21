@@ -8,12 +8,14 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SequenceGenerator;
 
 @Entity
 public class TurmaAluno{
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(generator = "turma_aluno_seq_generator", strategy = GenerationType.SEQUENCE)
+	@SequenceGenerator(name = "turma_aluno_generator", initialValue = 51, sequenceName = "SEQ_TURMA_ALUNO", allocationSize = 1)
 	private Long codigo;
 	
 	@ManyToOne

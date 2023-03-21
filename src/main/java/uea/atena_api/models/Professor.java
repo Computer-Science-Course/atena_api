@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
@@ -14,10 +15,11 @@ public class Professor implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(generator = "professor_seq_generator", strategy = GenerationType.SEQUENCE)
+	@SequenceGenerator(name = "professor_seq_generator", initialValue = 51, sequenceName = "SEQ_PROFESSOR", allocationSize = 1)
 	private Long codigo;
-	
-	@NotBlank(message="Nome é obrigatório")
+
+	@NotBlank(message = "Nome é obrigatório")
 	private String nome;
 
 	public Professor() {

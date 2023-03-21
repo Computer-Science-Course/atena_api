@@ -10,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -19,7 +20,8 @@ public class Prova implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(generator = "prova_seq_generator", strategy = GenerationType.SEQUENCE)
+	@SequenceGenerator(name = "prova_seq_generator", initialValue = 51, sequenceName = "SEQ_PROVA", allocationSize = 1)
 	private Long codigo;
 	
 	@NotBlank(message="Titulo é obrigatório!")

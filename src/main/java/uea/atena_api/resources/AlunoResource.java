@@ -27,7 +27,7 @@ public class AlunoResource {
 	private AlunoService alunoService;
 
 	@PostMapping
-	public ResponseEntity<Aluno> criar(@RequestBody Aluno aluno) {
+	public ResponseEntity<Aluno> criar(@Valid @RequestBody Aluno aluno) {
 		Aluno alunoSalva = alunoService.criar(aluno);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{codigo}")
 				.buildAndExpand(alunoSalva.getCodigo()).toUri();
