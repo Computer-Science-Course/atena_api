@@ -2,6 +2,7 @@ package uea.atena_api.services;
 
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,4 +34,9 @@ public class ProvaService {
 		Prova prova = provaRepository.findById(codigo).orElseThrow();
 		return prova;
 	}
+	
+	public void excluir(Long codigo) {
+		provaRepository.deleteById(codigo);
+	}
+
 }
