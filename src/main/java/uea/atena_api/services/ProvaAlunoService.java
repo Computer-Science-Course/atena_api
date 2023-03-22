@@ -13,8 +13,12 @@ public class ProvaAlunoService {
 
 	@Autowired
 	private ProvaAlunoRepository provaAlunoRepository;
-	
+
 	public List<ProvaAluno> listar() {
 		return provaAlunoRepository.findAll();
+	}
+
+	public void deletar(Long codigo) {
+		provaAlunoRepository.deleteById(codigo);
 	}
 }
