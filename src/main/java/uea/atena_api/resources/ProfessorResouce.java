@@ -22,37 +22,38 @@ import uea.atena_api.services.ProfessorService;
 @RestController
 @RequestMapping("/professores")
 public class ProfessorResouce {
-	
+
 	@Autowired
 	private ProfessorService professorService;
-	
+
 	@PostMapping
-	public ResponseEntity<Professor> criar(@Valid @RequestBody Professor professor){
-		Professor professorSalva = professorService.criar(professor);		
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{codigo}").buildAndExpand(professorSalva.getCodigo()).toUri();
+	public ResponseEntity<Professor> criar(@Valid @RequestBody Professor professor) {
+		Professor professorSalva = professorService.criar(professor);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{codigo}")
+				.buildAndExpand(professorSalva.getCodigo()).toUri();
 		return ResponseEntity.created(uri).body(professorSalva);
-	} 
-	
+	}
+
 	@GetMapping
-	public ResponseEntity<List<Professor>> listar(){
+	public ResponseEntity<List<Professor>> listar() {
 		List<Professor> professor = professorService.listar();
 		return ResponseEntity.ok().body(professor);
 	}
-	
+
 	@GetMapping(value = "/{codigo}")
-	public ResponseEntity<Professor> buscarPorId(@PathVariable Long codigo){
+	public ResponseEntity<Professor> buscarPorId(@PathVariable Long codigo) {
 		Professor professor = professorService.buscarPorId(codigo);
 		return ResponseEntity.ok().body(professor);
 	}
-	
+
 	@DeleteMapping(value = "/{codigo}")
-	public ResponseEntity<Void> deletar(@PathVariable Long codigo){
+	public ResponseEntity<Void> deletar(@PathVariable Long codigo) {
 		professorService.deletar(codigo);
 		return ResponseEntity.noContent().build();
 	}
-	
-	@PutMapping(value="/{codigo}")
-	public ResponseEntity<Professor> atualizar(@PathVariable Long codigo,@Valid @RequestBody Professor professor){
+
+	@PutMapping(value = "/{codigo}")
+	public ResponseEntity<Professor> atualizar(@PathVariable Long codigo, @Valid @RequestBody Professor professor) {
 		Professor professorSalva = professorService.atualizar(codigo, professor);
 		return ResponseEntity.ok().body(professorSalva);
 	}

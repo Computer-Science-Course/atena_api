@@ -2,9 +2,11 @@ package uea.atena_api.services;
 
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import uea.atena_api.models.Prova;
 import uea.atena_api.models.Prova;
 import uea.atena_api.models.Turma;
 import uea.atena_api.repositories.ProvaRepository;
@@ -32,5 +34,11 @@ public class ProvaService {
 	public Prova buscarPorCodigo(Long codigo) {
 		Prova prova = provaRepository.findById(codigo).orElseThrow();
 		return prova;
+	}
+	
+	public Prova atualizar(Long codigo, Prova prova) {
+		Prova provaSalva = provaRepository.findById(codigo).orElseThrow();
+		BeanUtils.copyProperties(prova, provaSalva, "codigo");
+		return provaRepository.save(provaSalva);
 	}
 }
