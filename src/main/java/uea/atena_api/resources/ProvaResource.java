@@ -3,7 +3,6 @@ package uea.atena_api.resources;
 import java.net.URI;
 import java.util.List;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,9 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import jakarta.validation.Valid;
-import uea.atena_api.models.Professor;
 import uea.atena_api.models.Prova;
-import uea.atena_api.models.Turma;
 import uea.atena_api.services.ProvaService;
 
 @RestController
