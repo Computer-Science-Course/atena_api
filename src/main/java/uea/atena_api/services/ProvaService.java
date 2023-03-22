@@ -14,31 +14,34 @@ import uea.atena_api.repositories.TurmaRepository;
 
 @Service
 public class ProvaService {
-	
+
 	@Autowired
 	private ProvaRepository provaRepository;
-	
+
 	@Autowired
 	private TurmaRepository turmaRepository;
-	
+
 	public Prova criar(Prova prova) {
-		Turma turma = turmaRepository.findById(
-				prova.getTurma().getCodigo()).orElseThrow();
+		Turma turma = turmaRepository.findById(prova.getTurma().getCodigo()).orElseThrow();
 		return provaRepository.save(prova);
 	}
 
 	public List<Prova> listar() {
 		return provaRepository.findAll();
 	}
-	
+
 	public Prova buscarPorCodigo(Long codigo) {
 		Prova prova = provaRepository.findById(codigo).orElseThrow();
 		return prova;
 	}
-	
+
 	public Prova atualizar(Long codigo, Prova prova) {
 		Prova provaSalva = provaRepository.findById(codigo).orElseThrow();
 		BeanUtils.copyProperties(prova, provaSalva, "codigo");
 		return provaRepository.save(provaSalva);
+	}
+
+	public void excluir(Long codigo) {
+		provaRepository.deleteById(codigo);
 	}
 }
