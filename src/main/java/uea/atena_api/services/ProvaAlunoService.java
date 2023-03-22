@@ -21,4 +21,9 @@ public class ProvaAlunoService {
 	public void deletar(Long codigo) {
 		provaAlunoRepository.deleteById(codigo);
 	}
+
+	public ProvaAluno buscarPorId(Long codigo) {
+		ProvaAluno provaAluno = provaAlunoRepository.findById(codigo).orElseThrow();
+		return provaAluno;
+	}
 }

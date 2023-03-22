@@ -31,4 +31,10 @@ public class ProvaAlunoResource {
 		provaAlunoService.deletar(codigo);
 		return ResponseEntity.noContent().build();
 	}
+
+	@GetMapping(value = "/{codigo}")
+	public ResponseEntity<ProvaAluno> buscarPorId(@PathVariable Long codigo) {
+		ProvaAluno provaAluno = provaAlunoService.buscarPorId(codigo);
+		return ResponseEntity.ok().body(provaAluno);
+	}
 }
