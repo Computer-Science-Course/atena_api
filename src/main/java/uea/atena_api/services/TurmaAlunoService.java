@@ -35,5 +35,9 @@ public class TurmaAlunoService {
 		
 		return turmaAlunoRepository.save(turmaAluno);
 	}
+	
+	public void excluir(Long codigo) {
+		turmaAlunoRepository.deleteById(codigo);
+	}
 
 }
