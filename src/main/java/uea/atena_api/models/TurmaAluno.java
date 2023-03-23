@@ -1,5 +1,6 @@
 package uea.atena_api.models;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
@@ -9,21 +10,25 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
-public class TurmaAluno{
-	
+public class TurmaAluno implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(generator = "turma_aluno_seq_generator", strategy = GenerationType.SEQUENCE)
-	@SequenceGenerator(name = "turma_aluno_generator", initialValue = 51, sequenceName = "SEQ_TURMA_ALUNO", allocationSize = 1)
+	@SequenceGenerator(name = "turma_aluno_seq_generator", initialValue = 51, sequenceName = "SEQ_TURMA_ALUNO", allocationSize = 1)
 	private Long codigo;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "codigo_turma")
+	@NotNull(message = "Turma é obrigatório")
 	private Turma turma;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "codigo_aluno")
+	@NotNull(message = "Aluno é obrigatório")
 	private Aluno aluno;
 
 	public TurmaAluno() {
@@ -77,6 +82,5 @@ public class TurmaAluno{
 		TurmaAluno other = (TurmaAluno) obj;
 		return Objects.equals(codigo, other.codigo);
 	}
-	
-	
+
 }

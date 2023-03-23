@@ -15,21 +15,19 @@ import uea.atena_api.models.TurmaAluno;
 import uea.atena_api.services.TurmaAlunoService;
 
 @RestController
-@RequestMapping("/turmaAlunos")
+@RequestMapping("/matricula")
 public class TurmaAlunoResource {
-	
-	
+
 	@Autowired
 	private TurmaAlunoService turmaAlunoService;
-	
-	
+
 	@PostMapping
-	public ResponseEntity<TurmaAluno> criar(@Valid @RequestBody TurmaAluno turmaAluno) {
-		TurmaAluno turmaAlunoSalva = turmaAlunoService.criar(turmaAluno);
+	public ResponseEntity<TurmaAluno> criar(@Valid @RequestBody TurmaAluno matricula) {
+		System.out.println("<<" + matricula.getAluno().getNome() + ">>");
+		TurmaAluno matriculaSalva = turmaAlunoService.criar(matricula);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{codigo}")
-				.buildAndExpand(turmaAlunoSalva.getCodigo()).toUri();
-		return ResponseEntity.created(uri).body(turmaAlunoSalva);
+				.buildAndExpand(matriculaSalva.getCodigo()).toUri();
+		return ResponseEntity.created(uri).body(matriculaSalva);
 	}
-	
 
 }
