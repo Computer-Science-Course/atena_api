@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import uea.atena_api.models.Turma;
 import uea.atena_api.services.TurmaService;
@@ -45,11 +46,13 @@ public class TurmaResource {
 		return ResponseEntity.ok().body(turma);
 	}
 	
+	@Operation(summary = "Delete a class by its id")
 	@DeleteMapping(value = "/{codigo}")
 	public ResponseEntity<Void> excluir(@PathVariable Long codigo) {
 		turmaService.excluir(codigo);
 		return ResponseEntity.noContent().build();
 	}
+	
 	
 	@PutMapping(value = "/{codigo}")
 	public ResponseEntity<Turma> atualizar(@PathVariable Long codigo, @Valid @RequestBody Turma turma) {

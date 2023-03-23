@@ -14,12 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import uea.atena_api.models.TurmaAluno;
 import uea.atena_api.services.TurmaAlunoService;
 
 @RestController
-@RequestMapping("/matricula")
+@RequestMapping("/matriculas")
 public class TurmaAlunoResource {
 
 	@Autowired
@@ -40,6 +41,7 @@ public class TurmaAlunoResource {
 		return ResponseEntity.created(uri).body(matriculaSalva);
 	}
 	
+	@Operation(summary = "Delete a enrollment by its id")
 	@DeleteMapping(value = "/{codigo}")
 	public ResponseEntity<Void> excluir(@PathVariable Long codigo) {
 		turmaAlunoService.excluir(codigo);

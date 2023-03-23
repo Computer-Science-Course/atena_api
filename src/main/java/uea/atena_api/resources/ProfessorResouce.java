@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import uea.atena_api.models.Professor;
 import uea.atena_api.services.ProfessorService;
@@ -46,6 +47,7 @@ public class ProfessorResouce {
 		return ResponseEntity.ok().body(professor);
 	}
 
+	@Operation(summary = "Delete a teacher by their id")
 	@DeleteMapping(value = "/{codigo}")
 	public ResponseEntity<Void> deletar(@PathVariable Long codigo) {
 		professorService.deletar(codigo);

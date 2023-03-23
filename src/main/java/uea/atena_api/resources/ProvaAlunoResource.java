@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import uea.atena_api.models.ProvaAluno;
 import uea.atena_api.services.ProvaAlunoService;
@@ -40,6 +41,7 @@ public class ProvaAlunoResource {
 		return ResponseEntity.ok().body(correcoes);
 	}
 
+	@Operation(summary = "Delete a ProvaAluno by its id")
 	@DeleteMapping(value = "/{codigo}")
 	public ResponseEntity<Void> deletar(@PathVariable Long codigo) {
 		provaAlunoService.deletar(codigo);
