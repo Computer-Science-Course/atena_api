@@ -11,11 +11,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class ProvaAluno implements Serializable {
-
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -23,24 +22,28 @@ public class ProvaAluno implements Serializable {
 	@SequenceGenerator(name = "prova_aluno_seq_generator", initialValue = 51, sequenceName = "SEQ_PROVA_ALUNO", allocationSize = 1)
 	private Long codigo;
 
-	@NotBlank(message = "Nota obrigátoria")
+	@NotNull(message = "Nota obrigátoria")
 	private BigDecimal pontuacao;
 
 	@ManyToOne
 	@JoinColumn(name = "codigo_prova")
+	@NotNull(message = "Prova obrigátoria")
 	private Prova prova;
 
 	@ManyToOne
 	@JoinColumn(name = "codigo_aluno")
+	@NotNull(message = "Aluno obrigátoria")
 	private Aluno aluno;
 
 	public ProvaAluno() {
 	}
 
-	public ProvaAluno(Long codigo, BigDecimal pontuacao) {
+	public ProvaAluno(Long codigo, BigDecimal pontuacao, Prova prova, Aluno aluno) {
 		super();
 		this.codigo = codigo;
 		this.pontuacao = pontuacao;
+		this.prova = prova;
+		this.aluno = aluno;
 	}
 
 	public Long getCodigo() {

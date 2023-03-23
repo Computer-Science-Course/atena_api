@@ -19,6 +19,10 @@ public class ProvaAlunoService {
 		return provaAlunoRepository.findAll();
 	}
 
+	public ProvaAluno criar(ProvaAluno correcao) {
+		return provaAlunoRepository.save(correcao);
+	}
+
 	public void deletar(Long codigo) {
 		provaAlunoRepository.deleteById(codigo);
 	}
@@ -27,10 +31,11 @@ public class ProvaAlunoService {
 		ProvaAluno provaAluno = provaAlunoRepository.findById(codigo).orElseThrow();
 		return provaAluno;
 	}
-	
-	public ProvaAluno atualizar (Long codigo, ProvaAluno provaAluno) {
+
+	public ProvaAluno atualizar(Long codigo, ProvaAluno provaAluno) {
 		ProvaAluno provaAlunoSalva = provaAlunoRepository.findById(codigo).orElseThrow();
 		BeanUtils.copyProperties(provaAluno, provaAlunoSalva, "codigo");
 		return provaAlunoRepository.save(provaAlunoSalva);
+
 	}
 }

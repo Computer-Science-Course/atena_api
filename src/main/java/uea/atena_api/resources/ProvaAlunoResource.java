@@ -1,5 +1,6 @@
 package uea.atena_api.resources;
 
+import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,11 +8,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import jakarta.validation.Valid;
 import uea.atena_api.models.ProvaAluno;
 import uea.atena_api.services.ProvaAlunoService;
@@ -23,10 +26,18 @@ public class ProvaAlunoResource {
 	@Autowired
 	private ProvaAlunoService provaAlunoService;
 
+	@PostMapping
+	public ResponseEntity<ProvaAluno> criar(@Valid @RequestBody ProvaAluno correcao) {
+		ProvaAluno correcaoSalva = provaAlunoService.criar(correcao);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{codigo}")
+				.buildAndExpand(correcaoSalva.getCodigo()).toUri();
+		return ResponseEntity.created(uri).body(correcaoSalva);
+	}
+
 	@GetMapping
 	public ResponseEntity<List<ProvaAluno>> listar() {
-		List<ProvaAluno> provaAluno = provaAlunoService.listar();
-		return ResponseEntity.ok().body(provaAluno);
+		List<ProvaAluno> correcoes = provaAlunoService.listar();
+		return ResponseEntity.ok().body(correcoes);
 	}
 
 	@DeleteMapping(value = "/{codigo}")
@@ -37,13 +48,13 @@ public class ProvaAlunoResource {
 
 	@GetMapping(value = "/{codigo}")
 	public ResponseEntity<ProvaAluno> buscarPorId(@PathVariable Long codigo) {
-		ProvaAluno provaAluno = provaAlunoService.buscarPorId(codigo);
-		return ResponseEntity.ok().body(provaAluno);
+		ProvaAluno correcao = provaAlunoService.buscarPorId(codigo);
+		return ResponseEntity.ok().body(correcao);
 	}
-	
+
 	@PutMapping(value = "/{codigo}")
-	public ResponseEntity<ProvaAluno>atualizar(@PathVariable Long codigo,@Valid@RequestBody ProvaAluno provaAluno){
-		ProvaAluno provaAlunoSalva = provaAlunoService.atualizar(codigo, provaAluno);
-		return ResponseEntity.ok().body(provaAlunoSalva);
+	public ResponseEntity<ProvaAluno> atualizar(@PathVariable Long codigo, @Valid @RequestBody ProvaAluno correcao) {
+		ProvaAluno correcaoSalva = provaAlunoService.atualizar(codigo, correcao);
+		return ResponseEntity.ok().body(correcaoSalva);
 	}
 }
