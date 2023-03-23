@@ -1,6 +1,7 @@
 package uea.atena_api.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,10 @@ public class AlunoService {
 	private AlunoRepository alunoRepository;
 
 	public Aluno criar(Aluno aluno) {
+		Optional<Aluno> alunoExistente = alunoRepository.findById(aluno.getCodigo());
+	    if(alunoExistente.isPresent()) {
+	        throw new RuntimeException("Já existe um Aluno com o código fornecido.");
+	    }
 		return alunoRepository.save(aluno);
 	}
 

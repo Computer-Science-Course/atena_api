@@ -1,12 +1,12 @@
 package uea.atena_api.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import uea.atena_api.models.Aluno;
-import uea.atena_api.models.ProvaAluno;
 import uea.atena_api.models.Turma;
 import uea.atena_api.models.TurmaAluno;
 import uea.atena_api.repositories.AlunoRepository;
@@ -29,16 +29,21 @@ public class TurmaAlunoService {
 		return turmaAlunoRepository.findAll();
 	}
 
-	public TurmaAluno criar(TurmaAluno turmaAluno) {
-		Turma turma = turmaRepository.findById(turmaAluno.getTurma().getCodigo()).orElseThrow();
-		Aluno aluno = alunoRepository.findById(turmaAluno.getAluno().getCodigo()).orElseThrow();
+	public TurmaAluno criar(TurmaAluno matricula) {
+		Optional<TurmaAluno> alunoExistente = turmaAlunoRepository.findById(matricula.getCodigo());
+	    if(alunoExistente.isPresent()) {
+	        throw new RuntimeException("Já existe uma Matricula com o código fornecido.");
+	    }
 		
-		return turmaAlunoRepository.save(turmaAluno);
+		Turma turma = turmaRepository.findById(matricula.getTurma().getCodigo()).orElseThrow();
+		Aluno aluno = alunoRepository.findById(matricula.getAluno().getCodigo()).orElseThrow();
+		
+		return turmaAlunoRepository.save(matricula);
 	}
 	
 	public TurmaAluno buscarPorId(Long codigo) {
-		TurmaAluno turmaAluno = turmaAlunoRepository.findById(codigo).orElseThrow();
-		return turmaAluno;
+		TurmaAluno matricula = turmaAlunoRepository.findById(codigo).orElseThrow();
+		return matricula;
 	}
 	
 	public void excluir(Long codigo) {

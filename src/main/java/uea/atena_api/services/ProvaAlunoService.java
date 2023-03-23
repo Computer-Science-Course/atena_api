@@ -1,6 +1,7 @@
 package uea.atena_api.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,10 @@ public class ProvaAlunoService {
 	}
 
 	public ProvaAluno criar(ProvaAluno correcao) {
+		Optional<ProvaAluno> correcaoExistente = provaAlunoRepository.findById(correcao.getCodigo());
+	    if(correcaoExistente.isPresent()) {
+	        throw new RuntimeException("Já existe uma Correção com o código fornecido.");
+	    }
 		return provaAlunoRepository.save(correcao);
 	}
 
