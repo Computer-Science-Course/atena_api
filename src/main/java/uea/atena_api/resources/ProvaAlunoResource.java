@@ -5,8 +5,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,10 +25,9 @@ public class ProvaAlunoResource {
 
 	@Autowired
 	private ProvaAlunoService provaAlunoService;
-	
+
 	@PostMapping
 	public ResponseEntity<ProvaAluno> criar(@Valid @RequestBody ProvaAluno correcao) {
-		System.out.println("<<" + correcao.getPontuacao() + ">>");
 		ProvaAluno correcaoSalva = provaAlunoService.criar(correcao);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{codigo}")
 				.buildAndExpand(correcaoSalva.getCodigo()).toUri();
@@ -34,7 +36,25 @@ public class ProvaAlunoResource {
 
 	@GetMapping
 	public ResponseEntity<List<ProvaAluno>> listar() {
-		List<ProvaAluno> provaAluno = provaAlunoService.listar();
-		return ResponseEntity.ok().body(provaAluno);
+		List<ProvaAluno> correcoes = provaAlunoService.listar();
+		return ResponseEntity.ok().body(correcoes);
+	}
+
+	@DeleteMapping(value = "/{codigo}")
+	public ResponseEntity<Void> deletar(@PathVariable Long codigo) {
+		provaAlunoService.deletar(codigo);
+		return ResponseEntity.noContent().build();
+	}
+
+	@GetMapping(value = "/{codigo}")
+	public ResponseEntity<ProvaAluno> buscarPorId(@PathVariable Long codigo) {
+		ProvaAluno correcao = provaAlunoService.buscarPorId(codigo);
+		return ResponseEntity.ok().body(correcao);
+	}
+
+	@PutMapping(value = "/{codigo}")
+	public ResponseEntity<ProvaAluno> atualizar(@PathVariable Long codigo, @Valid @RequestBody ProvaAluno correcao) {
+		ProvaAluno correcaoSalva = provaAlunoService.atualizar(codigo, correcao);
+		return ResponseEntity.ok().body(correcaoSalva);
 	}
 }
