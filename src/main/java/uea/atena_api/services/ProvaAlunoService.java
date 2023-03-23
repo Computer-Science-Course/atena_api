@@ -13,8 +13,12 @@ public class ProvaAlunoService {
 
 	@Autowired
 	private ProvaAlunoRepository provaAlunoRepository;
-	
+
 	public List<ProvaAluno> listar() {
 		return provaAlunoRepository.findAll();
+	}
+
+	public ProvaAluno criar(ProvaAluno correcao) {
+		return provaAlunoRepository.save(correcao);
 	}
 }

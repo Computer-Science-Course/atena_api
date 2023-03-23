@@ -31,7 +31,8 @@ public class AlunoService {
 		Aluno aluno = alunoRepository.findById(codigo).orElseThrow();
 		return aluno;
 	}
-	public Aluno atualizar (Long codigo, Aluno aluno) {
+
+	public Aluno atualizar(Long codigo, Aluno aluno) {
 		Aluno alunoSalva = alunoRepository.findById(codigo).orElseThrow();
 		BeanUtils.copyProperties(aluno, alunoSalva, "codigo");
 		return alunoRepository.save(alunoSalva);
