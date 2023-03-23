@@ -25,13 +25,7 @@ public class TurmaAlunoResource {
 
 	@Autowired
 	private TurmaAlunoService turmaAlunoService;
-
-	@GetMapping
-	public ResponseEntity<List<TurmaAluno>> listar() {
-		List<TurmaAluno> matriculas = turmaAlunoService.listar();
-		return ResponseEntity.ok().body(matriculas);
-	}
-
+	
 	@PostMapping
 	public ResponseEntity<TurmaAluno> criar(@Valid @RequestBody TurmaAluno matricula) {
 		System.out.println("<<" + matricula.getAluno().getNome() + ">>");
@@ -40,6 +34,19 @@ public class TurmaAlunoResource {
 				.buildAndExpand(matriculaSalva.getCodigo()).toUri();
 		return ResponseEntity.created(uri).body(matriculaSalva);
 	}
+
+	@GetMapping
+	public ResponseEntity<List<TurmaAluno>> listar() {
+		List<TurmaAluno> matriculas = turmaAlunoService.listar();
+		return ResponseEntity.ok().body(matriculas);
+	}
+
+	@GetMapping(value = "/{codigo}")
+	public ResponseEntity<TurmaAluno> buscarPorId(@PathVariable Long codigo){
+		TurmaAluno turmaAluno = turmaAlunoService.buscarPorId(codigo);
+		return ResponseEntity.ok().body(turmaAluno);
+	}
+	
 	
 	@Operation(summary = "Delete a enrollment by its id")
 	@DeleteMapping(value = "/{codigo}")
