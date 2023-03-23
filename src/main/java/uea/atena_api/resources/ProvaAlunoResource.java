@@ -7,9 +7,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import jakarta.validation.Valid;
 import uea.atena_api.models.ProvaAluno;
 import uea.atena_api.services.ProvaAlunoService;
 
@@ -36,5 +39,11 @@ public class ProvaAlunoResource {
 	public ResponseEntity<ProvaAluno> buscarPorId(@PathVariable Long codigo) {
 		ProvaAluno provaAluno = provaAlunoService.buscarPorId(codigo);
 		return ResponseEntity.ok().body(provaAluno);
+	}
+	
+	@PutMapping(value = "/{codigo}")
+	public ResponseEntity<ProvaAluno>atualizar(@PathVariable Long codigo,@Valid@RequestBody ProvaAluno provaAluno){
+		ProvaAluno provaAlunoSalva = provaAlunoService.atualizar(codigo, provaAluno);
+		return ResponseEntity.ok().body(provaAlunoSalva);
 	}
 }
