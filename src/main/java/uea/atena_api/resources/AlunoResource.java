@@ -1,9 +1,10 @@
 package uea.atena_api.resources;
 
 import java.net.URI;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +18,9 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import jakarta.validation.Valid;
+import uea.atena_api.dto.ResumoAlunoDto;
 import uea.atena_api.models.Aluno;
+import uea.atena_api.repositories.filters.AlunoFilter;
 import uea.atena_api.services.AlunoService;
 
 @RestController
@@ -35,10 +38,10 @@ public class AlunoResource {
 		return ResponseEntity.created(uri).body(alunoSalva);
 	}
 
-	@GetMapping
-	public ResponseEntity<List<Aluno>> listar() {
-		List<Aluno> aluno = alunoService.listar();
-		return ResponseEntity.ok().body(aluno);
+	@GetMapping	
+	public ResponseEntity<Page<ResumoAlunoDto>> resumir(AlunoFilter alunoFilter, Pageable pageable) {
+		Page<ResumoAlunoDto> resumos = alunoService.resumir(alunoFilter, pageable);
+		return ResponseEntity.ok().body(resumos);
 	}
 	
 	@GetMapping(value = "/{codigo}")

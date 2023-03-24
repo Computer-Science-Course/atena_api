@@ -5,10 +5,14 @@ import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import uea.atena_api.dto.ResumoAlunoDto;
 import uea.atena_api.models.Aluno;
 import uea.atena_api.repositories.AlunoRepository;
+import uea.atena_api.repositories.filters.AlunoFilter;
 
 @Service
 public class AlunoService {
@@ -16,6 +20,10 @@ public class AlunoService {
 	@Autowired
 	private AlunoRepository alunoRepository;
 
+	public Page<ResumoAlunoDto> resumir(AlunoFilter alunoFilter, Pageable pageable){
+		return alunoRepository.filtrar(alunoFilter, pageable);
+	}
+	
 	public Aluno criar(Aluno aluno) {
 		Optional<Aluno> alunoExistente = alunoRepository.findById(aluno.getCodigo());
 	    if(alunoExistente.isPresent()) {
