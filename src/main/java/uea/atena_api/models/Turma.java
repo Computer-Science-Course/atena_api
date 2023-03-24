@@ -3,6 +3,9 @@ package uea.atena_api.models;
 import java.io.Serializable;
 import java.util.Objects;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,7 +30,8 @@ public class Turma implements Serializable {
 	private String nome;
 
 	@ManyToOne
-	@JoinColumn(name = "codigo_professor")
+	@JoinColumn(name = "codigo_professor", referencedColumnName = "codigo")
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Professor professor;
 
 	public Turma() {
