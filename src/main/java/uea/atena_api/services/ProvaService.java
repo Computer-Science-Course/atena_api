@@ -1,6 +1,7 @@
 package uea.atena_api.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,11 @@ public class ProvaService {
 	private TurmaRepository turmaRepository;
 
 	public Prova criar(Prova prova) {
+		Optional<Prova> provaExistente = provaRepository.findById(prova.getCodigo());
+	    if(provaExistente.isPresent()) {
+	        throw new RuntimeException("Já existe uma Prova com o código fornecido.");
+	    }
+		
 		Turma turma = turmaRepository.findById(prova.getTurma().getCodigo()).orElseThrow();
 		return provaRepository.save(prova);
 	}
