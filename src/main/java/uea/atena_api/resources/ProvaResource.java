@@ -18,6 +18,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import uea.atena_api.models.Prova;
+import uea.atena_api.models.SpecialOperation;
 import uea.atena_api.services.ProvaService;
 
 @RestController
@@ -55,8 +56,8 @@ public class ProvaResource {
 	
 	@Operation(summary = "Delete a proof by its id")
 	@DeleteMapping(value = "/{codigo}")
-	public ResponseEntity<Void> excluir(@PathVariable Long codigo) {
-		provaService.excluir(codigo);
+	public ResponseEntity<Void> excluir(@PathVariable Long codigo, SpecialOperation specialOperation) {
+		provaService.excluir(codigo, specialOperation);
 		return ResponseEntity.noContent().build();
 	}
 }

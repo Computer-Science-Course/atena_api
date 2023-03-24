@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import jakarta.validation.Valid;
+import uea.atena_api.models.SpecialOperation;
 import uea.atena_api.models.TurmaAluno;
 import uea.atena_api.services.TurmaAlunoService;
 
@@ -48,8 +49,8 @@ public class TurmaAlunoResource {
 	}
 
 	@DeleteMapping(value = "/{codigo}")
-	public ResponseEntity<Void> excluir(@PathVariable Long codigo) {
-		turmaAlunoService.excluir(codigo);
+	public ResponseEntity<Void> excluir(@PathVariable Long codigo, SpecialOperation specialOperation) {
+		turmaAlunoService.excluir(codigo, specialOperation);
 		return ResponseEntity.noContent().build();
 	}
 

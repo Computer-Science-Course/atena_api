@@ -18,6 +18,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import uea.atena_api.models.Professor;
+import uea.atena_api.models.SpecialOperation;
 import uea.atena_api.services.ProfessorService;
 
 @RestController
@@ -49,8 +50,8 @@ public class ProfessorResouce {
 
 	@Operation(summary = "Delete a teacher by their id")
 	@DeleteMapping(value = "/{codigo}")
-	public ResponseEntity<Void> deletar(@PathVariable Long codigo) {
-		professorService.deletar(codigo);
+	public ResponseEntity<Void> deletar(@PathVariable Long codigo, SpecialOperation specialOperation) {
+		professorService.deletar(codigo, specialOperation);
 		return ResponseEntity.noContent().build();
 	}
 
