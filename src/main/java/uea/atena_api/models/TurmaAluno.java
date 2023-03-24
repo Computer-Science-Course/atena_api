@@ -3,6 +3,9 @@ package uea.atena_api.models;
 import java.io.Serializable;
 import java.util.Objects;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,12 +25,14 @@ public class TurmaAluno implements Serializable {
 	private Long codigo;
 
 	@ManyToOne
-	@JoinColumn(name = "codigo_turma")
+	@JoinColumn(name = "codigo_turma", referencedColumnName = "codigo")
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	@NotNull(message = "Turma é obrigatório")
 	private Turma turma;
 
 	@ManyToOne
-	@JoinColumn(name = "codigo_aluno")
+	@JoinColumn(name = "codigo_aluno", referencedColumnName = "codigo")
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	@NotNull(message = "Aluno é obrigatório")
 	private Aluno aluno;
 

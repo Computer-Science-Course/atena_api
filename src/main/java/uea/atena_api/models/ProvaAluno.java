@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,12 +29,14 @@ public class ProvaAluno implements Serializable {
 	private BigDecimal pontuacao;
 
 	@ManyToOne
-	@JoinColumn(name = "codigo_prova")
+	@JoinColumn(name = "codigo_prova", referencedColumnName = "codigo")
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	@NotNull(message = "Prova obrigátoria")
 	private Prova prova;
 
 	@ManyToOne
-	@JoinColumn(name = "codigo_aluno")
+	@JoinColumn(name = "codigo_aluno", referencedColumnName = "codigo")
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	@NotNull(message = "Aluno obrigátoria")
 	private Aluno aluno;
 
