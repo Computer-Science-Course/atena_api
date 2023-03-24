@@ -1,6 +1,7 @@
 package uea.atena_api.services;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
@@ -8,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import uea.atena_api.models.Prova;
+import uea.atena_api.models.SpecialOperation;
 import uea.atena_api.models.Turma;
+import uea.atena_api.models.enums.SpecialOperations;
 import uea.atena_api.repositories.ProvaRepository;
 import uea.atena_api.repositories.TurmaRepository;
 
@@ -46,7 +49,13 @@ public class ProvaService {
 		return provaRepository.save(provaSalva);
 	}
 
-	public void excluir(Long codigo) {
-		provaRepository.deleteById(codigo);
+	public void excluir(Long codigo, SpecialOperation specialOperation) {
+		if(Objects.isNull(specialOperation.getSpecialOperation())) {
+			throw new RuntimeException("Não é possível apagar Entidade porque possui relações.");			
+		}
+		if(specialOperation.getSpecialOperation() == SpecialOperations.DELETE_RELETED) {
+			provaRepository.deleteById(codigo);
+		}
+		throw new RuntimeException("Operação especial incorreta.");
 	}
 }

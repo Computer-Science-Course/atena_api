@@ -1,17 +1,18 @@
 package uea.atena_api.services;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import uea.atena_api.dto.ResumoTurmaDto;
 import uea.atena_api.models.Professor;
+import uea.atena_api.models.SpecialOperation;
 import uea.atena_api.models.Turma;
+import uea.atena_api.models.enums.SpecialOperations;
 import uea.atena_api.repositories.ProfessorRepository;
 import uea.atena_api.repositories.TurmaRepository;
 import uea.atena_api.repositories.filters.TurmaFilter;
@@ -43,8 +44,14 @@ public class TurmaService {
 		return turma;
 	}
 
-	public void excluir(Long codigo) {
-		turmaRepository.deleteById(codigo);
+	public void excluir(Long codigo, SpecialOperation specialOperation) {
+		if(Objects.isNull(specialOperation.getSpecialOperation())) {
+			throw new RuntimeException("Não é possível apagar Entidade porque possui relações.");			
+		}
+		if(specialOperation.getSpecialOperation() == SpecialOperations.DELETE_RELETED) {
+			turmaRepository.deleteById(codigo);
+		}
+		throw new RuntimeException("Operação especial incorreta.");
 	}
 
 	public Turma atualizar(Long codigo, Turma turma) {

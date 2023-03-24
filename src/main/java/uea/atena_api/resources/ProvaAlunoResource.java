@@ -19,6 +19,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import uea.atena_api.models.ProvaAluno;
+import uea.atena_api.models.SpecialOperation;
 import uea.atena_api.services.ProvaAlunoService;
 
 @RestController
@@ -38,7 +39,7 @@ public class ProvaAlunoResource {
 	}
 
 	@GetMapping
-	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_PROVAALUNO') and hasAuthority('SCOPE_read')" )
+	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_PROVAALUNO') and hasAuthority('SCOPE_read')")
 	public ResponseEntity<List<ProvaAluno>> listar() {
 		List<ProvaAluno> correcoes = provaAlunoService.listar();
 		return ResponseEntity.ok().body(correcoes);
@@ -47,13 +48,13 @@ public class ProvaAlunoResource {
 	@Operation(summary = "Delete a ProvaAluno by its id")
 	@DeleteMapping(value = "/{codigo}")
 	@PreAuthorize("hasAuthority('ROLE_REMOVER_PROVAALUNO') and hasAuthority('SCOPE_write')")
-	public ResponseEntity<Void> deletar(@PathVariable Long codigo) {
-		provaAlunoService.deletar(codigo);
+	public ResponseEntity<Void> deletar(@PathVariable Long codigo, SpecialOperation specialOperation) {
+		provaAlunoService.deletar(codigo, specialOperation);
 		return ResponseEntity.noContent().build();
 	}
 
 	@GetMapping(value = "/{codigo}")
-	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_PROVAALUNO') and hasAuthority('SCOPE_read')" )
+	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_PROVAALUNO') and hasAuthority('SCOPE_read')")
 	public ResponseEntity<ProvaAluno> buscarPorId(@PathVariable Long codigo) {
 		ProvaAluno correcao = provaAlunoService.buscarPorId(codigo);
 		return ResponseEntity.ok().body(correcao);

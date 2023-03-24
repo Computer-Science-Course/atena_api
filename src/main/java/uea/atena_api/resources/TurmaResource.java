@@ -19,6 +19,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import uea.atena_api.dto.ResumoTurmaDto;
+import uea.atena_api.models.SpecialOperation;
 import uea.atena_api.models.Turma;
 import uea.atena_api.repositories.filters.TurmaFilter;
 import uea.atena_api.services.TurmaService;
@@ -55,8 +56,8 @@ public class TurmaResource {
 	@Operation(summary = "Delete a class by its id")
 	@DeleteMapping(value = "/{codigo}")
 	@PreAuthorize("hasAuthority('ROLE_REMOVER_TURMA') and hasAuthority('SCOPE_write')")
-	public ResponseEntity<Void> excluir(@PathVariable Long codigo) {
-		turmaService.excluir(codigo);
+	public ResponseEntity<Void> excluir(@PathVariable Long codigo, SpecialOperation specialOperation) {
+		turmaService.excluir(codigo, specialOperation);
 		return ResponseEntity.noContent().build();
 	}
 	
