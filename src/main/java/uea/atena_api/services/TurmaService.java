@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import uea.atena_api.dto.ResumoTurmaDto;
@@ -22,19 +24,18 @@ public class TurmaService {
 
 	@Autowired
 	private ProfessorRepository professorRepository;
-
+	
 	public Turma criar(Turma turma) {
 		Optional<Turma> turmaExistente = turmaRepository.findById(turma.getCodigo());
 		if (turmaExistente.isPresent()) {
 			throw new RuntimeException("Já existe uma Turma com o código fornecido.");
 		}
-
 		Professor professor = professorRepository.findById(turma.getProfessor().getCodigo()).orElseThrow();
 		return turmaRepository.save(turma);
-	}
+		}	
+	
 	public List<ResumoTurmaDto> resumir(TurmaFilter turmaFilter){
 		return turmaRepository.filtrar(turmaFilter);
-
 	}
 
 	public Turma buscarPorId(Long codigo) {
