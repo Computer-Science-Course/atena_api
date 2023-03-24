@@ -6,10 +6,12 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import uea.atena_api.dto.ResumoTurmaDto;
 import uea.atena_api.models.Professor;
 import uea.atena_api.models.Turma;
 import uea.atena_api.repositories.ProfessorRepository;
 import uea.atena_api.repositories.TurmaRepository;
+import uea.atena_api.repositories.filters.TurmaFilter;
 
 @Service
 public class TurmaService {
@@ -26,8 +28,8 @@ public class TurmaService {
 		return turmaRepository.save(turma);
 	}
 	
-	public List<Turma> listar(){
-		return turmaRepository.findAll();
+	public List<ResumoTurmaDto> resumir(TurmaFilter turmaFilter){
+		return turmaRepository.filtrar(turmaFilter);
 	}
 	
 	public Turma buscarPorId(Long codigo) {

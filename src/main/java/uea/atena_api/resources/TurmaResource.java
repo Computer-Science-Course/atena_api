@@ -17,7 +17,9 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
+import uea.atena_api.dto.ResumoTurmaDto;
 import uea.atena_api.models.Turma;
+import uea.atena_api.repositories.filters.TurmaFilter;
 import uea.atena_api.services.TurmaService;
 
 @RestController
@@ -34,10 +36,10 @@ public class TurmaResource {
 		return ResponseEntity.created(uri).body(turmaSalva);
 	}
 	
-	@GetMapping
-	public ResponseEntity<List<Turma>> listar(){
-		List<Turma> turma = turmaService.listar();
-		return ResponseEntity.ok().body(turma);
+	@GetMapping	
+	public ResponseEntity<List<ResumoTurmaDto>> resumir(TurmaFilter turmaFilter) {
+		List<ResumoTurmaDto> resumos = turmaService.resumir(turmaFilter);
+		return ResponseEntity.ok().body(resumos);
 	}
 	
 	@GetMapping(value = "/{codigo}")
