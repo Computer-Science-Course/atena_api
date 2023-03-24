@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,6 +29,7 @@ public class ProvaAlunoResource {
 	private ProvaAlunoService provaAlunoService;
 
 	@PostMapping
+	@PreAuthorize("hasAuthority('ROLE_CADASTRAR_PROVAALUNO') and hasAuthority('SCOPE_write')")
 	public ResponseEntity<ProvaAluno> criar(@Valid @RequestBody ProvaAluno correcao) {
 		ProvaAluno correcaoSalva = provaAlunoService.criar(correcao);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{codigo}")
@@ -36,6 +38,7 @@ public class ProvaAlunoResource {
 	}
 
 	@GetMapping
+	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_PROVAALUNO') and hasAuthority('SCOPE_read')" )
 	public ResponseEntity<List<ProvaAluno>> listar() {
 		List<ProvaAluno> correcoes = provaAlunoService.listar();
 		return ResponseEntity.ok().body(correcoes);
@@ -43,18 +46,21 @@ public class ProvaAlunoResource {
 
 	@Operation(summary = "Delete a ProvaAluno by its id")
 	@DeleteMapping(value = "/{codigo}")
+	@PreAuthorize("hasAuthority('ROLE_REMOVER_PROVAALUNO') and hasAuthority('SCOPE_write')")
 	public ResponseEntity<Void> deletar(@PathVariable Long codigo) {
 		provaAlunoService.deletar(codigo);
 		return ResponseEntity.noContent().build();
 	}
 
 	@GetMapping(value = "/{codigo}")
+	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_PROVAALUNO') and hasAuthority('SCOPE_read')" )
 	public ResponseEntity<ProvaAluno> buscarPorId(@PathVariable Long codigo) {
 		ProvaAluno correcao = provaAlunoService.buscarPorId(codigo);
 		return ResponseEntity.ok().body(correcao);
 	}
 
 	@PutMapping(value = "/{codigo}")
+	@PreAuthorize("hasAuthority('ROLE_ATUALIZAR_PROVAALUNO') and hasAuthority('SCOPE_write')")
 	public ResponseEntity<ProvaAluno> atualizar(@PathVariable Long codigo, @Valid @RequestBody ProvaAluno correcao) {
 		ProvaAluno correcaoSalva = provaAlunoService.atualizar(codigo, correcao);
 		return ResponseEntity.ok().body(correcaoSalva);

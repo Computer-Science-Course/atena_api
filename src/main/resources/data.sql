@@ -304,3 +304,70 @@ INSERT INTO prova_aluno (`codigo`, `codigo_prova`, `codigo_aluno`, `pontuacao`) 
 INSERT INTO prova_aluno (`codigo`, `codigo_prova`, `codigo_aluno`, `pontuacao`) VALUES (49, '50', 50, 10);
 INSERT INTO prova_aluno (`codigo`, `codigo_prova`, `codigo_aluno`, `pontuacao`) VALUES (50, '1', 1, 10);
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INSERT INTO usuario (nome, email, senha) values ('Administrador','admin@uea.edu.br','{bcrypt}$2a$10$X607ZPhQ4EgGNaYKt3n4SONjIv9zc.VMWdEuhCuba7oLAL5IvcL5.');
+INSERT INTO usuario (nome, email, senha) values ('Maria Silva','maria@uea.edu.br','{bcrypt}$2a$10$Zc3w6HyuPOPXamaMhh.PQOXvDnEsadztbfi6/RyZWJDzimE8WQjaq');
+
+INSERT INTO permissao (descricao) values ('ROLE_CADASTRAR_ALUNO');
+INSERT INTO permissao (descricao) values ('ROLE_PESQUISAR_ALUNO');
+INSERT INTO permissao (descricao) values ('ROLE_ATUALIZAR_ALUNO');
+INSERT INTO permissao (descricao) values ('ROLE_REMOVER_ALUNO');
+
+INSERT INTO permissao (descricao) values ('ROLE_CADASTRAR_PERMISSAO');
+INSERT INTO permissao (descricao) values ('ROLE_PESQUISAR_PERMISSAO');
+INSERT INTO permissao (descricao) values ('ROLE_ATUALIZAR_PERMISSAO');
+INSERT INTO permissao (descricao) values ('ROLE_REMOVER_PERMISSAO');
+
+INSERT INTO permissao (descricao) values ('ROLE_CADASTRAR_PROFESSOR');
+INSERT INTO permissao (descricao) values ('ROLE_PESQUISAR_PROFESSOR');
+INSERT INTO permissao (descricao) values ('ROLE_ATUALIZAR_PROFESSOR');
+INSERT INTO permissao (descricao) values ('ROLE_REMOVER_PROFESSOR');
+
+INSERT INTO permissao (descricao) values ('ROLE_CADASTRAR_PROVAALUNO');
+INSERT INTO permissao (descricao) values ('ROLE_PESQUISAR_PROVAALUNO');
+INSERT INTO permissao (descricao) values ('ROLE_ATUALIZAR_PROVAALUNO');
+INSERT INTO permissao (descricao) values ('ROLE_REMOVER_PROVAALUNO');
+
+INSERT INTO permissao (descricao) values ('ROLE_CADASTRAR_PROVA');
+INSERT INTO permissao (descricao) values ('ROLE_PESQUISAR_PROVA');
+INSERT INTO permissao (descricao) values ('ROLE_ATUALIZAR_PROVA');
+INSERT INTO permissao (descricao) values ('ROLE_REMOVER_PROVA');
+
+INSERT INTO permissao (descricao) values ('ROLE_CADASTRAR_TURMAALUNO');
+INSERT INTO permissao (descricao) values ('ROLE_PESQUISAR_TURMAALUNO');
+INSERT INTO permissao (descricao) values ('ROLE_ATUALIZAR_TURMAALUNO');
+INSERT INTO permissao (descricao) values ('ROLE_REMOVER_TURMAALUNO');
+
+INSERT INTO permissao (descricao) values ('ROLE_CADASTRAR_TURMA');
+INSERT INTO permissao (descricao) values ('ROLE_PESQUISAR_TURMA');
+INSERT INTO permissao (descricao) values ('ROLE_ATUALIZAR_TURMA');
+INSERT INTO permissao (descricao) values ('ROLE_REMOVER_TURMA');
+
+INSERT INTO permissao (descricao) values ('ROLE_CADASTRAR_USUARIO');
+INSERT INTO permissao (descricao) values ('ROLE_PESQUISAR_USUARIO');
+INSERT INTO permissao (descricao) values ('ROLE_ATUALIZAR_USUARIO');
+INSERT INTO permissao (descricao) values ('ROLE_REMOVER_USUARIO');
+
+
+
+INSERT INTO usuario_permissao (codigo_usuario,codigo_permissao) values (1, 1), (1, 2),
+(1, 3), (1, 4),(1, 5), (1, 6),(1, 7), (1, 8),(1, 9), (1, 10),(1, 11), (1, 12), (1, 13), 
+(1, 14),(1, 15), (1, 16), (1, 17), (1, 18), (1, 19), (1, 20), (1, 21), (1, 22), (1, 23), (1, 24), (1, 25),
+(1, 26), (1, 27), (1, 28), (1, 29), (1, 30), (1, 31), (1, 32);
+
+INSERT INTO usuario_permissao (codigo_usuario,codigo_permissao) values (2, 2), (2, 10), (2, 18), (2, 24);
+

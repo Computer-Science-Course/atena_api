@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,6 +32,7 @@ public class AlunoResource {
 	private AlunoService alunoService;
 
 	@PostMapping
+	@PreAuthorize("hasAuthority('ROLE_CADASTRAR_ALUNO') and hasAuthority('SCOPE_write')")
 	public ResponseEntity<Aluno> criar(@Valid @RequestBody Aluno aluno) {
 		Aluno alunoSalva = alunoService.criar(aluno);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{codigo}")
@@ -39,12 +41,14 @@ public class AlunoResource {
 	}
 
 	@GetMapping	
+	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_ALUNO') and hasAuthority('SCOPE_read')" )
 	public ResponseEntity<Page<ResumoAlunoDto>> resumir(AlunoFilter alunoFilter, Pageable pageable) {
 		Page<ResumoAlunoDto> resumos = alunoService.resumir(alunoFilter, pageable);
 		return ResponseEntity.ok().body(resumos);
 	}
 	
 	@GetMapping(value = "/{codigo}")
+	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_ALUNO') and hasAuthority('SCOPE_read')" )
 	public ResponseEntity<Aluno> buscarPorId(@PathVariable Long codigo){
 		Aluno aluno = alunoService.buscarPorId(codigo);
 		return ResponseEntity.ok().body(aluno);
@@ -52,11 +56,13 @@ public class AlunoResource {
 	
 	@Operation(summary = "Delete a student by its id")
 	@DeleteMapping(value = "/{codigo}")
+	@PreAuthorize("hasAuthority('ROLE_REMOVER_ALUNO') and hasAuthority('SCOPE_write')")
 	public ResponseEntity<Void> deletar(@PathVariable Long codigo){
 		alunoService.deletar(codigo);
 		return ResponseEntity.noContent().build();
 	}
 	@PutMapping(value = "/{codigo}")
+	@PreAuthorize("hasAuthority('ROLE_ATUALIZAR_ALUNO') and hasAuthority('SCOPE_write')")
 	public ResponseEntity<Aluno>atualizar(@PathVariable Long codigo,@Valid@RequestBody Aluno aluno){
 		Aluno alunoSalva = alunoService.atualizar(codigo, aluno);
 		return ResponseEntity.ok().body(alunoSalva);
