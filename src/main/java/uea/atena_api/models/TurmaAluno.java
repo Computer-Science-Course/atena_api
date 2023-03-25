@@ -3,6 +3,8 @@ package uea.atena_api.models;
 import java.io.Serializable;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,11 +23,13 @@ public class TurmaAluno implements Serializable {
 	@SequenceGenerator(name = "turma_aluno_seq_generator", initialValue = 51, sequenceName = "SEQ_TURMA_ALUNO", allocationSize = 1)
 	private Long codigo;
 
+	@JsonIgnoreProperties({"professor"})
 	@ManyToOne
 	@JoinColumn(name = "codigo_turma")
 	@NotNull(message = "Turma é obrigatório")
 	private Turma turma;
 
+	@JsonIgnoreProperties({"matricula"})
 	@ManyToOne
 	@JoinColumn(name = "codigo_aluno")
 	@NotNull(message = "Aluno é obrigatório")

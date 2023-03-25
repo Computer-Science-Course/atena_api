@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,11 +27,13 @@ public class ProvaAluno implements Serializable {
 	@NotNull(message = "Nota obrigátoria")
 	private BigDecimal pontuacao;
 
+	@JsonIgnoreProperties({"data_aplicacao", "turma"})
 	@ManyToOne
 	@JoinColumn(name = "codigo_prova")
 	@NotNull(message = "Prova obrigátoria")
 	private Prova prova;
 
+	@JsonIgnoreProperties({"matricula"})
 	@ManyToOne
 	@JoinColumn(name = "codigo_aluno")
 	@NotNull(message = "Aluno obrigátoria")

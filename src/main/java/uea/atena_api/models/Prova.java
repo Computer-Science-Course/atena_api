@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -30,6 +32,7 @@ public class Prova implements Serializable{
 	@NotNull(message="Data de aplicacao é obrigatório!")
 	private LocalDate data_aplicacao;
 	
+	@JsonIgnoreProperties({"nome"})
 	@NotNull(message = "Turma é obrigatória")
 	@ManyToOne
 	@JoinColumn(name = "codigo_turma")

@@ -36,7 +36,7 @@ public class AlunoService {
 		return alunoRepository.findAll();
 	}
 
-	public void deletar(Long codigo) {
+	public void excluir(Long codigo) {
 		alunoRepository.deleteById(codigo);
 	}
 
