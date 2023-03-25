@@ -21,6 +21,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import uea.atena_api.dto.ResumoAlunoDto;
 import uea.atena_api.models.Aluno;
+import uea.atena_api.models.SpecialOperation;
 import uea.atena_api.repositories.filters.AlunoFilter;
 import uea.atena_api.services.AlunoService;
 
@@ -59,9 +60,9 @@ public class AlunoResource {
 	@PreAuthorize("hasAuthority('ROLE_REMOVER_ALUNO') and hasAuthority('SCOPE_write')")
 	public ResponseEntity<Void> excluir(@PathVariable Long codigo) {
 		alunoService.excluir(codigo);
-
 		return ResponseEntity.noContent().build();
 	}
+	
 	@PutMapping(value = "/{codigo}")
 	@PreAuthorize("hasAuthority('ROLE_ATUALIZAR_ALUNO') and hasAuthority('SCOPE_write')")
 	public ResponseEntity<Aluno>atualizar(@PathVariable Long codigo,@Valid@RequestBody Aluno aluno){
