@@ -30,6 +30,7 @@ public class Prova implements Serializable{
 	@NotNull(message="Data de aplicacao é obrigatório!")
 	private LocalDate data_aplicacao;
 	
+	
 	@NotNull(message = "Turma é obrigatória")
 	@ManyToOne
 	@JoinColumn(name = "codigo_turma")

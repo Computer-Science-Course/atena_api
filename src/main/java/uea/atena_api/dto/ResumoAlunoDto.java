@@ -2,7 +2,7 @@ package uea.atena_api.dto;
 
 public class ResumoAlunoDto {
 
-	private Long cogigo;
+	private Long codigo;
 	private String nome;
 	private Long matricula;
 
@@ -10,19 +10,19 @@ public class ResumoAlunoDto {
 		super();
 	}
 
-	public ResumoAlunoDto(Long cogigo, String nome, Long matricula) {
+	public ResumoAlunoDto(Long codigo, String nome, Long matricula) {
 		super();
-		this.cogigo = cogigo;
+		this.codigo = codigo;
 		this.nome = nome;
 		this.matricula = matricula;
 	}
 
-	public Long getCogigo() {
-		return cogigo;
+	public Long getcodigo() {
+		return codigo;
 	}
 
-	public void setCogigo(Long cogigo) {
-		this.cogigo = cogigo;
+	public void setcodigo(Long codigo) {
+		this.codigo = codigo;
 	}
 
 	public String getNome() {
