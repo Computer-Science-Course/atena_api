@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,22 +17,22 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
-public class Prova implements Serializable{
+public class Prova implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(generator = "prova_seq_generator", strategy = GenerationType.SEQUENCE)
 	@SequenceGenerator(name = "prova_seq_generator", initialValue = 51, sequenceName = "SEQ_PROVA", allocationSize = 1)
 	private Long codigo;
-	
-	@NotBlank(message="Titulo é obrigatório!")
+
+	@NotBlank(message = "Titulo é obrigatório!")
 	private String titulo;
-	
-	@NotNull(message="Data de aplicacao é obrigatório!")
+
+	@NotNull(message = "Data de aplicacao é obrigatório!")
 	private LocalDate data_aplicacao;
-	
-	
+
+	@JsonIgnoreProperties({ "nome" })
 	@NotNull(message = "Turma é obrigatória")
 	@ManyToOne
 	@JoinColumn(name = "codigo_turma")
@@ -95,7 +97,5 @@ public class Prova implements Serializable{
 		Prova other = (Prova) obj;
 		return Objects.equals(codigo, other.codigo);
 	}
-	
-	
 
 }

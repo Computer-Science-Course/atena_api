@@ -4,8 +4,11 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
 
+
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,12 +31,14 @@ public class ProvaAluno implements Serializable {
 	@NotNull(message = "Nota obrigátoria")
 	private BigDecimal pontuacao;
 
+	@JsonIgnoreProperties({"data_aplicacao", "turma"})
 	@ManyToOne
 	@JoinColumn(name = "codigo_prova", referencedColumnName = "codigo")
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@NotNull(message = "Prova obrigátoria")
 	private Prova prova;
 
+	@JsonIgnoreProperties({"matricula"})
 	@ManyToOne
 	@JoinColumn(name = "codigo_aluno", referencedColumnName = "codigo")
 	@OnDelete(action = OnDeleteAction.CASCADE)

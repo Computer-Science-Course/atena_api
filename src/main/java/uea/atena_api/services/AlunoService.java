@@ -1,6 +1,7 @@
 package uea.atena_api.services;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 import uea.atena_api.dto.ResumoAlunoDto;
 import uea.atena_api.models.Aluno;
+import uea.atena_api.models.SpecialOperation;
+import uea.atena_api.models.enums.SpecialOperations;
 import uea.atena_api.repositories.AlunoRepository;
 import uea.atena_api.repositories.filters.AlunoFilter;
 
@@ -36,8 +39,9 @@ public class AlunoService {
 		return alunoRepository.findAll();
 	}
 
-	public void deletar(Long codigo) {
+	public void excluir(Long codigo) {
 		alunoRepository.deleteById(codigo);
+
 	}
 
 	public Aluno buscarPorId(Long codigo) {

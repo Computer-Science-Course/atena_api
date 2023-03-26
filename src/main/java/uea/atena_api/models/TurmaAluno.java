@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,12 +25,14 @@ public class TurmaAluno implements Serializable {
 	@SequenceGenerator(name = "turma_aluno_seq_generator", initialValue = 51, sequenceName = "SEQ_TURMA_ALUNO", allocationSize = 1)
 	private Long codigo;
 
+	@JsonIgnoreProperties({"professor"})
 	@ManyToOne
 	@JoinColumn(name = "codigo_turma", referencedColumnName = "codigo")
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@NotNull(message = "Turma é obrigatório")
 	private Turma turma;
 
+	@JsonIgnoreProperties({"matricula"})
 	@ManyToOne
 	@JoinColumn(name = "codigo_aluno", referencedColumnName = "codigo")
 	@OnDelete(action = OnDeleteAction.CASCADE)

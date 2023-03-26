@@ -57,10 +57,11 @@ public class AlunoResource {
 	@Operation(summary = "Delete a student by its id")
 	@DeleteMapping(value = "/{codigo}")
 	@PreAuthorize("hasAuthority('ROLE_REMOVER_ALUNO') and hasAuthority('SCOPE_write')")
-	public ResponseEntity<Void> deletar(@PathVariable Long codigo){
-		alunoService.deletar(codigo);
+	public ResponseEntity<Void> excluir(@PathVariable Long codigo) {
+		alunoService.excluir(codigo);
 		return ResponseEntity.noContent().build();
 	}
+	
 	@PutMapping(value = "/{codigo}")
 	@PreAuthorize("hasAuthority('ROLE_ATUALIZAR_ALUNO') and hasAuthority('SCOPE_write')")
 	public ResponseEntity<Aluno>atualizar(@PathVariable Long codigo,@Valid@RequestBody Aluno aluno){
